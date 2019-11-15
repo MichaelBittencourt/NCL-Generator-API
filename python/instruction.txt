@@ -1,0 +1,9 @@
+To add this library to python is need locate the site-packages folder.
+To do this you need open python3
+
+import sys
+print(sys.path)
+
+Get the path to /usr/sammy/my_env/lib/python3.5/site-packages/
+
+move your package to this folder.
