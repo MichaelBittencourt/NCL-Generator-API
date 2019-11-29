@@ -14,18 +14,6 @@ from lxml import etree
 
 class Region:
 
-    id = None
-    height = None
-    width = None
-    title = None
-    top = None
-    botton = None
-    left = None
-    right = None
-    zIndex = None
-    listRegion = []
-
-
     def __init__(self, id=None, height=None, width=None, title=None,  top=None, botton=None, left=None, right=None, zIndex=None):
         self.id = id
         self.height = height

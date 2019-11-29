@@ -21,6 +21,8 @@ from ncl.simpleaction import SimpleAction
 from ncl.compoundaction import CompoundAction
 from ncl.link import Link
 from ncl.bind import Bind
+from ncl.area import Area
+from ncl.property import Property
 
 class Ncl:
 
