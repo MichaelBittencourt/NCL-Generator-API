@@ -9,25 +9,16 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 
-class Property:
+class Property(AbstractElement):
 
     def __init__(self, name, value=None, externable=None):
-        self.name = name
-        self.value = value
-        self.externable = externable
-
-    def getElement(self):
-        propertyElement = etree.Element("property")
-        propertyElement.set("name", self.name)
-        propertyElement.set("value", self.value)
-        if self.externable is not None:
-            propertyElement.set("externable", self.value)
-        return propertyElement
-    
-    def generate(self):
-        xmlCode = self.getElement()
-        return etree.tostring(xmlCode, method="xml", pretty_print=True).decode()
+        super().__init__("property", ["name", "value", "externable"], [])
+        self.set("name", name)
+        if value is not None:
+            self.set("value", value)
+        if externable is not None:
+            self.set("externable", externable)
 
     pass
