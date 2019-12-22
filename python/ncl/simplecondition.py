@@ -9,22 +9,27 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 
-class SimpleCondition:
+class SimpleCondition(AbstractElement):
 
-    role = None
-
-    def __init__(self, role):
-        self.role = role
-
-    def getElement(self):
-        simpleCondition = etree.Element("simpleCondition")
-        simpleCondition.set("role", self.role)
-        return simpleCondition
-        
-
-    def generate(self):
-        print("Constructor call generate")
+    def __init__(self, role, delay=None, eventType=None, key=None, transition=None, min=None, max=None, qualifier=None):
+        listAttributes = ["role", "delay", "eventType", "key", "transition", "min", "max", "qualifier"]
+        super().__init__("simpleCondition", listAttributes, [])
+        self.set("role", role)
+        if delay is not None:
+            self.set("delay", delay)
+        if eventType is not None:
+            self.set("eventType", eventType)
+        if key is not None:
+            self.set("key", key)
+        if transition is not None:
+            self.set("transition", transition)
+        if min is not None:
+            self.set("min", min)
+        if max is not None:
+            self.set("max", max)
+        if qualifier is not None:
+            self.set("qualifier", qualifier)
 
     pass
