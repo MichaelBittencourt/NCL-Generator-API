@@ -9,53 +9,35 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 
-class Area:
+class Area(AbstractElement):
 
     def __init__(self, id, coords=None, begin=None, end=None, beginText=None, endText=None, beginPosition=None, endPosition=None, first=None, last=None, label=None, clip=None):
-        self.id = id
-        self.coords = coords
-        self.begin = begin
-        self.end = end
-        self.beginText = beginText
-        self.endText = endText
-        self.beginPosition = beginPosition
-        self.endPosition = endPosition
-        self.first = first
-        self.last = last
-        self.label = label
-        self.clip = clip
-
-    def getElement(self):
-        area = etree.Element("area")
-        area.set("id", self.id)
-        if self.coords is not None:
-            area.set("coords", self.coords)
-        if self.begin is not None:
-            area.set("begin", self.begin)
-        if self.end is not None:
-            area.set("end", self.end)
-        if self.beginText is not None:
-            area.set("beginText", self.beginText)
-        if self.endText is not None:
-            area.set("endText", self.endText)
-        if self.beginPosition is not None:
-            area.set("beginPosition", self.beginPosition)
-        if self.endPosition is not None:
-            area.set("endPosition", self.endPosition)
-        if self.first is not None:
-            area.set("first", self.first)
-        if self.last is not None:
-            area.set("last", self.last)
-        if self.label is not None:
-            area.set("label", self.label)
-        if self.clip is not None:
-            area.set("clip", self.clip)
-        return area
-
-    def generate(self):
-        xmlCode = self.getElement()
-        return etree.tostring(xmlCode, method="xml", pretty_print=True).decode()
+        listAttributes = ["id", "coords", "begin", "end", "beginText", "endText", "beginPosition", "endPosition", "first", "last", "label", "clip"]
+        super().__init__("area", listAttributes, [])
+        self.set("id", id)
+        if coords is not None:
+            self.set("coords", coords)
+        if begin is not None:
+            self.set("begin", begin)
+        if end is not None:
+            self.set("end", end)
+        if beginText is not None:
+            self.set("beginText", beginText)
+        if endText is not None:
+            self.set("endText", endText)
+        if beginPosition is not None:
+            self.set("beginPosition", beginPosition)
+        if endPosition is not None:
+            self.set("endPosition", endPosition)
+        if first is not None:
+            self.set("first", first)
+        if last is not None:
+            self.set("last", last)
+        if label is not None:
+            self.set("label", label)
+        if clip is not None:
+            self.set("clip", clip)
 
     pass
