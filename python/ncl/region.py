@@ -10,89 +10,31 @@
 
 """
 
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 
-class Region:
+class Region(AbstractElement):
 
-    def __init__(self, id=None, height=None, width=None, title=None,  top=None, botton=None, left=None, right=None, zIndex=None):
-        self.id = id
-        self.height = height
-        self.width = width
-        self.top = top
-        self.left = left
-        self.zIndex = zIndex
-        self.listRegion = []
+    def __init__(self, id, height=None, width=None, title=None,  top=None, botton=None, left=None, right=None, zIndex=None):
+        listAttributes = ["id", "height", "width", "title",  "top", "botton", "left", "right", "zIndex"]
+        listChildren = [Region]
+        super().__init__("region", listAttributes, listChildren)
+        self.set("id", id)
+        if title is not None:
+            self.set("title", title)
+        if height is not None:
+            self.set("height", height)
+        if width is not None:
+            self.set("width", width)
+        if top is not None:
+            self.set("top", top)
+        if botton is not None:
+            self.set("botton", botton)
+        if left is not None:
+            self.set("left", left)
+        if right is not None:
+            self.set("right", right)
+        if zIndex is not None:
+            self.set("zIndex", zIndex)
 
-    def getElement(self):
-        region = etree.Element("region")
-        region.set("id", self.id)
-        region.set("height", self.height)
-        region.set("width", self.width)
-        if self.top is not None:
-            region.set("top", self.top)
-        if self.left is not None:
-            region.set("left", self.left)
-        if self.zIndex is not None:
-            region.set("zIndex", self.zIndex)
-        for i in self.listRegion:
-            region.append(i.getElement())
-        return region
-        
-    def generate(self):
-        xmlCode = self.getElement()
-        return etree.tostring(xmlCode, method="xml", pretty_print=True).decode()
-    
-    def add(self, nclComponent):
-        if isinstance(nclComponent, Region):
-            self.listRegion.append(nclComponent)
-
-    def getChild(self, id):
-        for iten in self.listRegion:
-            if item.getId() == id: 
-                return item
-
-    def setId(self, id):
-        self.id = id;
-
-    def getId(self):
-        return self.id
-
-    def setHeight(self, height):
-        self.height = height
-
-    def getHeight(self):
-        return self.height
-
-    def setWidth(self, width):
-        self.width = width
-
-    def getWidth(self):
-        return self.width
-
-    def setTop(self, top):
-        self.top = top
-
-    def getTop(self):
-        return self.top
-
-    def setLeft(self, left):
-        self.left = left
-
-    def getLeft(self):
-        return self.left
-
-    def setZIndex(self, zIndex):
-        self.zIndex = zIndex
-
-    def getZIndex(self):
-        return self.zIndex
-
-    """
-    def setListRegion(self, listRegion):
-        self.listRegion = listRegion
-
-    def getListRegion(self):
-        return self.listRegion
-    """
     pass
 

@@ -33,6 +33,11 @@ class AbstractElement(ABC):
         if attribute in self.listAttributes:
             self.listAttributes[attribute] = value;
 
+    def get(self, attribute):
+        if attribute in self.listAttributes:
+            return self.listAttributes[attribute];
+        return None
+
     def getElement(self):
         element = etree.Element(self.name)
         for key in self.listAttributes:

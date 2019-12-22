@@ -8,7 +8,7 @@
 
 if test -n "$1" 
 then
-    cp -r ncl $($1 -m site --user-site)
+    cp -rfi ncl $($1 -m site --user-site)
 else
     echo "
     execute:
