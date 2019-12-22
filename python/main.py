@@ -19,6 +19,8 @@ region.add(regionChild)
 region.add(ncl.Region(id="regImageChild2", height="90%", width="50%"))
 descriptor = ncl.Descriptor(id="descImage", region="regImage")
 media = ncl.Media(id="image", descriptor="descImage", src="lena.jpg")
+media.add(ncl.Area(id="test"))
+media.add(ncl.Property(name="ahamm", value="48"))
 port = ncl.Port(id="pImage", component="image")
 
 conditionOnBegin = ncl.SimpleCondition(role="onBegin")
