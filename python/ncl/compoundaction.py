@@ -9,28 +9,18 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 from ncl.simpleaction import SimpleAction
 
-class CompoundAction:
+class CompoundAction(AbstractElement):
 
-    listActions = []
-
-    def __init__(self):
-        self.listActions = []
-
-    def getElement(self):
-        compoundAction = etree.Element("compoundAction")
-        for i in self.listActions:
-            compoundAction.append(i.getElement())
-        return compoundAction
-        
-    def add(self, nclComponent):
-        if isinstance(nclComponent, CompoundAction) or isinstance(nclComponent, SimpleAction):
-            self.listConditions.append(nclComponent)
-
-    def generate(self):
-        print("Constructor call generate")
+    def __init__(self, operator, delay=None):
+        listAttributes = ["operator", "delay"]
+        listChildren = [CompoundAction, SimpleAction]
+        super().__init__("compoundAction", listAttributes, listChildren)
+        self.set("operator", operator)
+        if delay is not None:
+            self.set("delay", delay)
 
     pass
 
