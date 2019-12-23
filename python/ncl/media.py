@@ -15,15 +15,15 @@ from ncl.property import Property
 
 class Media(AbstractElement):
 
-    def __init__(self, id, descriptor, src, typeMedia=None, refer=None, instance=None):
+    def __init__(self, id, descriptor, src, type=None, refer=None, instance=None):
         listAttributes = ["id", "descriptor", "src", "type", "refer", "instance"]
         listChildren = [Area, Property]
         super().__init__("media", listAttributes, listChildren)
         self.set("id", id)
         self.set("descriptor", descriptor)
         self.set("src", src)
-        if typeMedia is not None:
-            self.set("type", typeMedia)
+        if type is not None:
+            self.set("type", type)
         if refer is not None:
             self.set("refer", refer)
         if instance is not None:
