@@ -10,22 +10,17 @@
 
 """
 
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 
-class Port:
+class Port(AbstractElement):
 
-    id = None
-    component = None
-
-    def __init__(self, id, component):
-        self.id = id
-        self.component = component
-
-    def getElement(self):
-        port = etree.Element("port")
-        port.set("id", self.id)
-        port.set("component", self.component)
-        return port
+    def __init__(self, id, component, interface=None):
+        listAttributes = ["id", "component", "interface"]
+        super().__init__("port", listAttributes, [])
+        self.set("id", id)
+        self.set("component", component)
+        if interface is not None:
+            self.set("interface", interface)
 
     pass
 
