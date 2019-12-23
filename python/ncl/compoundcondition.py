@@ -9,31 +9,19 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 from ncl.simplecondition import SimpleCondition
 
-class CompoundCondition:
+class CompoundCondition(AbstractElement):
 
-    operator = None
-    listConditions = []
-
-    def __init__(self, operator):
-        self.operator = operator
-        self.listConditions = []
-
-    def getElement(self):
-        compoundCondition = etree.Element("compoundCondition")
-        compoundCondition.set("operator", self.operator)
-        for i in self.listConditions:
-            compoundCondition.append(i.getElement())
-        return compoundCondition
-        
-    def add(self, nclComponent):
-        if isinstance(nclComponent, CompoundCondition) or isinstance(nclComponent, SimpleCondition) or isinstance(nclComponent, CompoundCondition) or isinstance(nclComponent, SimpleCondition):
-            self.listConditions.append(nclComponent)
-
-    def generate(self):
-        print("Constructor call generate")
+    def __init__(self, operator, delay=None):
+        listAttributes = ["operator", "delay"]
+        """ TODO: Still need add CompoundStatement and AssessmentStatement """
+        listChildren = [CompoundCondition, SimpleCondition]
+        super().__init__("compoundCondition", listAttributes, listChildren)
+        self.set("operator", operator)
+        if delay is not None:
+            self.set("delay", delay)
 
     pass
 
