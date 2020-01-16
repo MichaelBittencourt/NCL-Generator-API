@@ -9,25 +9,51 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 
-class Descriptor:
+class Descriptor(AbstractElement):
 
-    id = None
-    region = None
+    def __init__(self, id, player=None, explicitDur=None, region=None, freeze=None, moveLeft=None, moveRight=None, moveUp=None, moveDown=None, focusIndex=None, focusBorderColor=None, focusBorderWidth=None, focusBorderTransparency=None, focusSrc=None, focusSelSrc=None, selBorderColor=None, transIn=None, transOut=None):
+        listAttributes = ["id", "player", "explicitDur", "region", "freeze", "moveLeft", "moveRight", "moveUp", "moveDown", "focusIndex", "focusBorderColor", "focusBorderWidth", "focusBorderTransparency", "focusSrc", "focusSelSrc", "selBorderColor", "transIn", "transOut"]
 
-    def __init__(self, id, region):
-        self.id = id
-        self.region = region
+        """TODO: Create descriptorParam object and use class Param"""
+        listChildren = []
 
-    def getElement(self):
-        descriptor = etree.Element("descriptor")
-        descriptor.set("id", self.id)
-        descriptor.set("region", self.region)
-        return descriptor
+        super().__init__("descriptor", listAttributes, listChildren)
+        self.set("id", id)
+        if player is not None:
+            self.set("player", player)
+        if explicitDur is not None:
+            self.set("explicitDur", explicitDur)
+        if region is not None:
+            self.set("region", region)
+        if freeze is not None:
+            self.set("freeze", freeze)
+        if moveLeft is not None:
+            self.set("moveLeft", moveLeft)
+        if moveRight is not None:
+            self.set("moveRight", moveRight)
+        if moveUp is not None:
+            self.set("moveUp", moveUp)
+        if moveDown is not None:
+            self.set("moveDown", moveDown)
+        if focusIndex is not None:
+            self.set("focusIndex", focusIndex)
+        if focusBorderColor is not None:
+            self.set("focusBorderColor", focusBorderColor)
+        if focusBorderWidth is not None:
+            self.set("focusBorderWidth", focusBorderWidth)
+        if focusBorderTransparency is not None:
+            self.set("focusBorderTransparency", focusBorderTransparency)
+        if focusSrc is not None:
+            self.set("focusSrc", focusSrc)
+        if focusSelSrc is not None:
+            self.set("focusSelSrc", focusSelSrc)
+        if selBorderColor is not None:
+            self.set("selBorderColor", selBorderColor)
+        if transIn is not None:
+            self.set("transIn", transIn)
+        if transOut is not None:
+            self.set("transOut", transOut)
         
-
-    def generate(self):
-        print("Constructor call generate")
-
     pass
