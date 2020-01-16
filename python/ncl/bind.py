@@ -9,29 +9,23 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 
-class Bind:
+class Bind(AbstractElement):
 
-    role = None
-    component = None
-    interface = None
+    def __init__(self, role, component, interface=None, descriptor=None):
 
-    def __init__(self, role, component, interface=None):
-        self.role = role
-        self.component = component
-        self.interface = interface
+        listAttributes = ["role", "component", "interface", "descriptor"]
 
-    def getElement(self):
-        bind = etree.Element("bind")
-        bind.set("role", self.role)
-        bind.set("component", self.component)
-        if self.interface is not None:
-            bind.set("interface", self.interface)
-        return bind
-        
+        """TODO: create bindParam object and use class param"""
+        listChildren = []
 
-    def generate(self):
-        print("Constructor call generate")
+        super().__init__("bind", listAttributes, listChildren)
+        self.set("role", role)
+        self.set("component", component)
+        if interface is not None:
+            self.set("interface", interface)
+        if descriptor is not None:
+            self.set("descriptor", descriptor)
 
     pass
