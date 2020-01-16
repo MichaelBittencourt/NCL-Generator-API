@@ -9,29 +9,21 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 from ncl.bind import Bind
 
-class Link:
+class Link(AbstractElement):
 
-    xconnector = None
-    listBinds = []
+    def __init__(self, xconnector, id=None):
 
-    def __init__(self, xconnector):
-        self.xconnector = xconnector
-        self.listBinds = []
+        listAttributes = ["id", "xconnector"]
 
-    def add(self, nclComponent):
-        if isinstance(nclComponent, Bind):
-            self.listBinds.append(nclComponent)
+        """TODO: create linkParam object and use class param"""
+        listChildren = [Bind]
+        super().__init__("link", listAttributes, listChildren)
 
-    def getElement(self):
-        link = etree.Element("link", xconnector=self.xconnector)
-        for i in self.listBinds:
-            link.append(i.getElement())
-        return link
-
-    def generate(self):
-        print("Constructor call generate")
+        self.set("xconnector", xconnector)
+        if id is not None:
+            self.set("id", id)
 
     pass
