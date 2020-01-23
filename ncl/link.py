@@ -11,6 +11,7 @@
 """
 from ncl.abstractelement import AbstractElement
 from ncl.bind import Bind
+from ncl.param import Param
 
 class Link(AbstractElement):
 
@@ -18,12 +19,16 @@ class Link(AbstractElement):
 
         listAttributes = ["id", "xconnector"]
 
-        """TODO: create linkParam object and use class param"""
-        listChildren = [Bind]
+        listChildren = [Bind, Param]
         super().__init__("link", listAttributes, listChildren)
 
         self.set("xconnector", xconnector)
         if id is not None:
             self.set("id", id)
+
+    def customizeItem(self, item):
+        if isinstance(item, Param):
+            item.setTagName("linkParam")
+        return item
 
     pass

@@ -10,6 +10,7 @@
 
 """
 from ncl.abstractelement import AbstractElement
+from ncl.param import Param
 
 class Bind(AbstractElement):
 
@@ -17,8 +18,7 @@ class Bind(AbstractElement):
 
         listAttributes = ["role", "component", "interface", "descriptor"]
 
-        """TODO: create bindParam object and use class param"""
-        listChildren = []
+        listChildren = [Param]
 
         super().__init__("bind", listAttributes, listChildren)
         self.set("role", role)
@@ -27,5 +27,10 @@ class Bind(AbstractElement):
             self.set("interface", interface)
         if descriptor is not None:
             self.set("descriptor", descriptor)
+
+    def customizeItem(self, item):
+        if isinstance(item, Param):
+            item.setTagName("bindParam")
+        return item
 
     pass

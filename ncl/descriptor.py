@@ -10,14 +10,14 @@
 
 """
 from ncl.abstractelement import AbstractElement
+from ncl.param import Param
 
 class Descriptor(AbstractElement):
 
     def __init__(self, id, player=None, explicitDur=None, region=None, freeze=None, moveLeft=None, moveRight=None, moveUp=None, moveDown=None, focusIndex=None, focusBorderColor=None, focusBorderWidth=None, focusBorderTransparency=None, focusSrc=None, focusSelSrc=None, selBorderColor=None, transIn=None, transOut=None):
         listAttributes = ["id", "player", "explicitDur", "region", "freeze", "moveLeft", "moveRight", "moveUp", "moveDown", "focusIndex", "focusBorderColor", "focusBorderWidth", "focusBorderTransparency", "focusSrc", "focusSelSrc", "selBorderColor", "transIn", "transOut"]
 
-        """TODO: Create descriptorParam object and use class Param"""
-        listChildren = []
+        listChildren = [Param]
 
         super().__init__("descriptor", listAttributes, listChildren)
         self.set("id", id)
@@ -55,5 +55,10 @@ class Descriptor(AbstractElement):
             self.set("transIn", transIn)
         if transOut is not None:
             self.set("transOut", transOut)
-        
+
+    def customizeItem(self, item):
+        if isinstance(item, Param):
+            item.setTagName("descriptorParam")
+        return item
+
     pass

@@ -26,6 +26,8 @@ from ncl.link import Link
 from ncl.bind import Bind
 from ncl.area import Area
 from ncl.property import Property
+from ncl.param import Param
+from ncl.connectorparam import ConnectorParam
 
 class Ncl(AbstractElement):
 
