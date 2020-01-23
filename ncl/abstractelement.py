@@ -68,8 +68,8 @@ class AbstractElement(ABC):
                     element.append(item.getElement())
         return element
 
-    def generate(self):
+    def generate(self, encoding=None):
         xmlCode = self.getElement()
-        return etree.tostring(xmlCode, method="xml", pretty_print=True).decode()
+        return etree.tostring(xmlCode, encoding=encoding, method="xml", pretty_print=True).decode()
 
     pass

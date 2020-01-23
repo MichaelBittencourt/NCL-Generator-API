@@ -11,7 +11,7 @@ import ncl
 
 
 """nclCode = Ncl("nclv1", "http://www.ncl.org.br/NCL3.0/EDTVProfile")"""
-nclCode = ncl.Ncl()
+nclCode = ncl.Ncl(id="nclv1")
 
 region = ncl.Region(id="regImage", height="15%", width="100%")
 regionChild = ncl.Region(id="regImageChild", height="90%", width="50%")
