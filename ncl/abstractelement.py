@@ -21,18 +21,25 @@ class AbstractElement(ABC):
         self.name = name
         self.listAttributes = OrderedDict()
         self.listChildren = OrderedDict()
-        for attribute in listAttributes:
-            self.listAttributes[attribute] = None
-        for child in listChildren:
-            self.listChildren[child] = []
+        self._appendAttributes(listAttributes)
+        self._appendChildren(listChildren)
 
     def _setTagName(self, tagName):
         self.name = tagName
 
+    def _appendAttributes(self, listAttributes):
+        for attribute in listAttributes:
+            self.listAttributes[attribute] = None
+
+    def _appendChildren(self, listChildren):
+        for child in listChildren:
+            self.listChildren[child] = []
+
     def add(self, nclComponent):
-        if type(nclComponent) in self.listChildren:
-            self.listChildren[type(nclComponent)].append(nclComponent)
-            return True;
+        for item in self.listChildren:
+            if isinstance(nclComponent, item):
+                self.listChildren[item].append(nclComponent)
+                return True;
         else:
             """
             I can use this to convert OrderedDict in list

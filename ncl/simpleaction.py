@@ -10,8 +10,9 @@
 
 """
 from ncl.abstractelement import AbstractElement
+from ncl.action import Action
 
-class SimpleAction(AbstractElement):
+class SimpleAction(AbstractElement, Action):
 
     def __init__(self, role, delay=None, eventType=None, actionType=None, value=None, min=None, max=None, qualifier=None, repeat=None, repeatDelay=None, duration=None, by=None):
         listAttributes = ["role", "delay", "eventType", "actionType", "value", "min", "max", "qualifier", "repeat", "repeatDelay", "duration", "by"]

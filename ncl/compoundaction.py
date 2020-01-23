@@ -9,16 +9,18 @@
 """
 
 """
-from ncl.abstractelement import AbstractElement
-from ncl.simpleaction import SimpleAction
+from ncl.compound import Compound
+from ncl.action import Action
 
-class CompoundAction(AbstractElement):
+class CompoundAction(Compound, Action):
 
     def __init__(self, operator, delay=None):
-        listAttributes = ["operator", "delay"]
-        listChildren = [CompoundAction, SimpleAction]
-        super().__init__("compoundAction", listAttributes, listChildren)
-        self.set("operator", operator)
+        super().__init__(operator)
+        listAttributes = ["delay"]
+        listChildren = [Action]
+        self._setTagName("compoundAction")
+        self._appendAttributes(listAttributes)
+        self._appendChildren(listChildren)
         if delay is not None:
             self.set("delay", delay)
 
