@@ -9,40 +9,21 @@
 """
 
 """
-from lxml import etree
-from ncl.region import Region
-from ncl.descriptor import Descriptor
-from ncl.causalconnector import CausalConnector
+from ncl.abstractelement import AbstractElement
+from ncl.regionbase import RegionBase
+from ncl.descriptorbase import DescriptorBase
+from ncl.connectorbase import ConnectorBase
 
-class Head:
+class Head(AbstractElement):
 
     def __init__(self):
-        self.listRegion = []
-        self.listDescriptor = []
-        self.listConnector = []
+        listAttributes = []
+        listChildren = [RegionBase, DescriptorBase, ConnectorBase]
+        super().__init__("head", listAttributes, listChildren)
+        self.add(RegionBase())
+        self.add(DescriptorBase())
+        self.add(ConnectorBase())
 
-    def add(self, nclComponent):
-        if isinstance(nclComponent, Region):
-            self.listRegion.append(nclComponent)
-        elif isinstance(nclComponent, Descriptor):
-            self.listDescriptor.append(nclComponent)
-        elif isinstance(nclComponent, CausalConnector):
-            self.listConnector.append(nclComponent)
-
-    def getElement(self):
-        head = etree.Element("head")
-        regionBase = etree.Element("regionBase")
-        descriptorBase = etree.Element("descriptorBase")
-        connectorBase = etree.Element("connectorBase")
-        for i in self.listRegion:
-            regionBase.append(i.getElement())
-        for i in self.listDescriptor:
-            descriptorBase.append(i.getElement())
-        for i in self.listConnector:
-            connectorBase.append(i.getElement())
-        head.append(regionBase)
-        head.append(descriptorBase)
-        head.append(connectorBase)
-        return head
+    #TODO Still need add all childrens to head tag
 
     pass
