@@ -8,8 +8,7 @@ This project is a NCL Generator to write a Python code and generate a NCL file.
 To Start
 --------
 
-.. code-block:: bash
-    :linenos:
+.. code-block:: bash 
 
     user@user-pc:~$ git clone https://github.com/MichaelBittencourt/NCL-Generator-API.git
     user@user-pc:~$ cd NCL-Generator-API
