@@ -14,9 +14,9 @@ from ncl.abstractparam import AbstractParam
 class Param(AbstractParam):
 
     def __init__(self, name, value, tagName=None):
-        super().__init__("name", "value")
+        super().__init__(name)
         self._setTagName(tagName)
-        self.set("name", name)
+        self._appendAttributes(["value"])
         self.set("value", value)
 
     def setTagName(self, tagName):

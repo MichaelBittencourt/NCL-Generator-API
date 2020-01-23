@@ -9,17 +9,19 @@
 """
 
 """
-from ncl.abstractelement import AbstractElement
-from ncl.simplecondition import SimpleCondition
+from ncl.compound import Compound
+from ncl.condition import Condition
 
-class CompoundCondition(AbstractElement):
+class CompoundCondition(Compound, Condition):
 
     def __init__(self, operator, delay=None):
-        listAttributes = ["operator", "delay"]
+        super().__init__(operator)
+        listAttributes = ["delay"]
         """ TODO: Still need add CompoundStatement and AssessmentStatement """
-        listChildren = [CompoundCondition, SimpleCondition]
-        super().__init__("compoundCondition", listAttributes, listChildren)
-        self.set("operator", operator)
+        listChildren = [Condition]
+        self._setTagName("compoundCondition")
+        self._appendAttributes(listAttributes)
+        self._appendChildren(listChildren)
         if delay is not None:
             self.set("delay", delay)
 

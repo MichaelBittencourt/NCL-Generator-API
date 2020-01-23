@@ -14,9 +14,10 @@ from ncl.abstractparam import AbstractParam
 class ConnectorParam(AbstractParam):
 
     def __init__(self, name, type=None):
-        super().__init__("name", "type")
+        super().__init__(name)
         self._setTagName("connectorParam")
-        self.set("name", name)
-        self.set("type", type)
+        self._appendAttributes(["value"])
+        if type is not None:
+            self.set("type", type)
 
     pass

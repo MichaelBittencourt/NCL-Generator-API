@@ -9,9 +9,10 @@
 """
 
 """
+from ncl.condition import Condition
 from ncl.abstractelement import AbstractElement
 
-class SimpleCondition(AbstractElement):
+class SimpleCondition(AbstractElement, Condition):
 
     def __init__(self, role, delay=None, eventType=None, key=None, transition=None, min=None, max=None, qualifier=None):
         listAttributes = ["role", "delay", "eventType", "key", "transition", "min", "max", "qualifier"]

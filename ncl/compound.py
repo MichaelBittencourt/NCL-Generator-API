@@ -12,13 +12,14 @@
 from abc import ABC, abstractmethod
 from ncl.abstractelement import AbstractElement
 
-class AbstractParam(AbstractElement):
+class Compound(AbstractElement):
 
     @abstractmethod
-    def __init__(self, name):
-        listAttributes = ["name"]
+    def __init__(self, operator):
+        listAttributes = ["operator"]
         listChildren = []
         super().__init__(None, listAttributes, listChildren)
-        self.set("name", name)
+        self.set("operator", operator)
 
     pass
+
