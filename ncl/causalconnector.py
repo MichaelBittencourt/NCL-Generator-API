@@ -14,12 +14,13 @@ from ncl.compoundcondition import CompoundCondition
 from ncl.simplecondition import SimpleCondition
 from ncl.compoundaction import CompoundAction
 from ncl.simpleaction import SimpleAction
+from ncl.connectorparam import ConnectorParam
 
 class CausalConnector(AbstractElement):
 
     def __init__(self, id, condition, action):
         listAttributes = ["id"]
-        listChildren = [CompoundCondition, SimpleCondition, CompoundAction, SimpleAction]
+        listChildren = [CompoundCondition, SimpleCondition, CompoundAction, SimpleAction, ConnectorParam]
         super().__init__("causalConnector", listAttributes, listChildren)
         self.set("id", id)
 

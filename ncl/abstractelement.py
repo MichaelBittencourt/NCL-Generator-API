@@ -26,6 +26,9 @@ class AbstractElement(ABC):
         for child in listChildren:
             self.listChildren[child] = []
 
+    def _setTagName(self, tagName):
+        self.name = tagName
+
     def add(self, nclComponent):
         if type(nclComponent) in self.listChildren:
             self.listChildren[type(nclComponent)].append(nclComponent)
@@ -65,8 +68,11 @@ class AbstractElement(ABC):
         for key in self.listChildren:
             if self.listChildren[key] is not None:
                 for item in self.listChildren[key]:
-                    element.append(item.getElement())
+                    element.append(self.customizeItem(item).getElement())
         return element
+
+    def customizeItem(self, item):
+        return item
 
     def generate(self, encoding=None):
         xmlCode = self.getElement()
