@@ -9,39 +9,20 @@
 """
 
 """
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 from ncl.compoundcondition import CompoundCondition
 from ncl.simplecondition import SimpleCondition
 from ncl.compoundaction import CompoundAction
 from ncl.simpleaction import SimpleAction
 
-class CausalConnector:
-
-    id = None
-    condition = None
-    action = None
+class CausalConnector(AbstractElement):
 
     def __init__(self, id, condition, action):
-        self.id = id
-        if isinstance(condition, CompoundCondition) or isinstance(condition, SimpleCondition):
-            self.condition = condition
-        else:
-            self.condition = None
-        if isinstance(action, CompoundAction) or isinstance(action, SimpleAction):
-            print("Add action")
-            self.action = action
-        else:
-            self.action = None
+        listAttributes = ["id"]
+        listChildren = [CompoundCondition, SimpleCondition, CompoundAction, SimpleAction]
+        super().__init__("causalConnector", listAttributes, listChildren)
+        self.set("id", id)
 
-    def getElement(self):
-        connector = etree.Element("causalConnector", id=self.id)
-        if self.condition is not None:
-            connector.append(self.condition.getElement())
-        if self.action is not None:
-            connector.append(self.action.getElement())
-        return connector
-
-    def generate(self):
-        print("Constructor call generate")
+    #TODO Still need setup logic to caudalConnector and need update tu user Condition when this class will created
 
     pass

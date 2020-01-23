@@ -6,9 +6,12 @@
 #
 # Distributed under terms of the MIT license.
 
-from lxml import etree
+from ncl.abstractelement import AbstractElement
 from ncl.body import Body
 from ncl.head import Head
+from ncl.regionbase import RegionBase
+from ncl.descriptorbase import DescriptorBase
+from ncl.connectorbase import ConnectorBase
 from ncl.port import Port
 from ncl.media import Media
 from ncl.region import Region
@@ -24,92 +27,21 @@ from ncl.bind import Bind
 from ncl.area import Area
 from ncl.property import Property
 
-class Ncl:
+class Ncl(AbstractElement):
 
-    head = None
-    body = None
-    id = None
-    xmlns = None
-
-    def __init__(self, id=None, xmlns=None):
-        self.id = id
-        self.xmlns = xmlns
-        self.head = Head() 
-        self.body = Body() 
-
-    def add(self, nclComponent):
-        if isinstance(nclComponent, Region) or isinstance(nclComponent, Descriptor) or isinstance(nclComponent, CausalConnector):
-            self.head.add(nclComponent)
-        else:
-           self.body.add(nclComponent)
-
-    def getElement(self):
-        nclCode = etree.Element('ncl')
-        if self.id is not None:
-            nclCode.set("id", self.id)
-        if self.xmlns is not None:
-            nclCode.set("xmlns", self.xmlns)
-        nclCode.append(self.head.getElement())
-        nclCode.append(self.body.getElement())
-        return nclCode
+    def __init__(self, id, title=None, xmlns=None):
+        listAttributes = ["id", "title", "xmlns"]
+        listChildren = [Head, Body]
+        super().__init__("ncl", listAttributes, listChildren)
+        self.set("id", id)
+        if title is not None:
+            self.set("title", title)
+        if xmlns is not None:
+            self.set("xmlns", xmlns)
+        self.add(Head())
+        self.add(Body())
 
     def generate(self):
-        xmlCode = self.getElement()
-        return etree.tostring(xmlCode, encoding="iso-8859-1", method="xml", pretty_print=True).decode()
+        return super().generate(encoding="iso-8859-1")
     
     pass
-
-if __name__ == "__main__":
-    """import sys
-    print("Console args[1] = " + sys.argv[1])"""
-    print("Create a simple Example:")
-    print("""from ncl import *
-nclCode = Ncl(\"nclv1\", \"http://www.ncl.org.br/NCL3.0/EDTVProfile\")
-
-region = Region(id=\"regImage\", height=\"15%\", width=\"100%\", top=\"0\", left=\"10%\", zIndex=\"10\")
-descriptor = Descriptor(id=\"descImage\", region=\"regImage\")
-media = Media(id=\"image\", descriptor=\"descImage\", src=\"lena.jpg\")
-port = Port(id=\"pImage\", component=\"image\")
-
-region2 = Region(id=\"regImage2\", height=\"15%\", width=\"100%\", top=\"0\", left=\"10%\", zIndex=\"10\")
-descriptor2 = Descriptor(id=\"descImage2\", region=\"regImage2\")
-media2 = Media(id=\"image2\", descriptor=\"descImage2\", src=\"lena.jpg\")
-port2 = Port(id=\"pImage2\", component=\"image2\")
-
-nclCode.add(region)
-nclCode.add(descriptor)
-nclCode.add(media)
-nclCode.add(port)
-
-nclCode.add(region2)
-nclCode.add(descriptor2)
-nclCode.add(media2)
-nclCode.add(port2)
-print(nclCode.generate())
-          
-generate this File file:
-          
-    """)
-    nclCode = Ncl("nclv1", "http://www.ncl.org.br/NCL3.0/EDTVProfile")
-
-    region = Region(id="regImage", height="15%", width="100%", top="0", left="10%", zIndex="10")
-    descriptor = Descriptor(id="descImage", region="regImage")
-    media = Media(id="image", descriptor="descImage", src="lena.jpg")
-    port = Port(id="pImage", component="image")
-
-    region2 = Region(id="regImage2", height="15%", width="100%", top="0", left="10%", zIndex="10")
-    descriptor2 = Descriptor(id="descImage2", region="regImage2")
-    media2 = Media(id="image2", descriptor="descImage2", src="lena.jpg")
-    port2 = Port(id="pImage2", component="image2")
-
-    nclCode.add(region)
-    nclCode.add(descriptor)
-    nclCode.add(media)
-    nclCode.add(port)
-
-    nclCode.add(region2)
-    nclCode.add(descriptor2)
-    nclCode.add(media2)
-    nclCode.add(port2)
-    print(nclCode.generate())
-
