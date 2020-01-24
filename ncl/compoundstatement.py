@@ -10,21 +10,19 @@
 
 """
 from ncl.compound import Compound
-from ncl.condition import Condition
 from ncl.assessment import Assessment
 
-class CompoundCondition(Compound, Condition):
+class CompoundStatement(Compound, Assessment):
 
-    def __init__(self, operator, delay=None):
+    def __init__(self, operator, isNegated=None):
         super().__init__(operator)
-        listAttributes = ["delay"]
-        """ TODO: Still need add CompoundStatement and AssessmentStatement """
-        listChildren = [Condition, Assessment]
-        self._setTagName("compoundCondition")
+        listAttributes = ["isNegated"]
+        listChildren = [Assessment]
+        self._setTagName("compoundStatement")
         self._appendAttributes(listAttributes)
         self._appendChildren(listChildren)
-        if delay is not None:
-            self.set("delay", delay)
+        if isNegated is not None:
+            self.set("isNegated", isNegated)
 
     pass
 

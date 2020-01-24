@@ -18,8 +18,8 @@ from ncl.region import Region
 from ncl.descriptor import Descriptor
 from ncl.causalconnector import CausalConnector
 from ncl.simplecondition import SimpleCondition
-from ncl.simplecondition import SimpleCondition
 from ncl.compoundcondition import CompoundCondition
+from ncl.compoundstatement import CompoundStatement
 from ncl.simpleaction import SimpleAction
 from ncl.compoundaction import CompoundAction
 from ncl.link import Link
