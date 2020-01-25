@@ -24,6 +24,15 @@ class CausalConnector(AbstractElement):
         self.add(condition)
         self.add(action)
 
+    def add(self, nclComponent):
+        if isinstance(nclComponent, Condition):
+            if len(self._getListChildren()[Condition]) > 0:
+                raise Exception("Is not possible add more of one Condition in CausalConnector")
+        if isinstance(nclComponent, Action):
+            if len(self._getListChildren()[Action]) > 0:
+                raise Exception("Is not possible add more of one Action in CausalConnector")
+        return super().add(nclComponent)
+
     #TODO Still need setup logic to caudalConnector and need update tu user Condition when this class will created
 
     pass

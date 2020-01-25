@@ -50,6 +50,10 @@ compoundAction = ncl.CompoundAction(operator="seq")
 compoundAction.add(actionStop)
 compoundAction.add(actionStart)
 connectoronBeginStop = ncl.CausalConnector(id="onBeginOrOnEndStopStart", condition=compoundCondition, action=compoundAction)
+try:
+    connectoronBeginStop.add(conditionOnBegin)
+except Exception as error:
+    print(error)
 connectoronBeginStop.add(ncl.ConnectorParam(name="myParam"))
 link = ncl.Link(xconnector="onBeginOrOnEndStopStart")
 bindOnBegin = ncl.Bind(role="onBegin", component="image")
