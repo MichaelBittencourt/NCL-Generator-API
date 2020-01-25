@@ -15,7 +15,7 @@ class AttributeAssessment(ConnectorRole):
     def __init__(self, role, eventType, key=None, attributeType=None, offset=None):
         super().__init__(role, eventType)
         listAttributes = ["key", "attributeType", "offset"]
-        self._setTagName("attributeType")
+        self._setTagName("attributeAssessment")
         self._appendAttributes(listAttributes)
         if key is not None:
             self.set("key", key)
