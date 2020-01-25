@@ -18,7 +18,6 @@ class CompoundCondition(Compound, Condition):
     def __init__(self, operator, delay=None):
         super().__init__(operator)
         listAttributes = ["delay"]
-        """ TODO: Still need add CompoundStatement and AssessmentStatement """
         listChildren = [Condition, Assessment]
         self._setTagName("compoundCondition")
         self._appendAttributes(listAttributes)

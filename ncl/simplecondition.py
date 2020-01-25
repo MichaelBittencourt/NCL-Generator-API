@@ -10,27 +10,18 @@
 
 """
 from ncl.condition import Condition
-from ncl.abstractelement import AbstractElement
+from ncl.simple import Simple
 
-class SimpleCondition(AbstractElement, Condition):
+class SimpleCondition(Simple, Condition):
 
     def __init__(self, role, delay=None, eventType=None, key=None, transition=None, min=None, max=None, qualifier=None):
-        listAttributes = ["role", "delay", "eventType", "key", "transition", "min", "max", "qualifier"]
-        super().__init__("simpleCondition", listAttributes, [])
-        self.set("role", role)
-        if delay is not None:
-            self.set("delay", delay)
-        if eventType is not None:
-            self.set("eventType", eventType)
+        super().__init__(role, eventType, delay, min, max, qualifier)
+        listAttributes = ["key", "transition"]
+        self._setTagName("simpleCondition")
+        self._appendAttributes(listAttributes)
         if key is not None:
             self.set("key", key)
         if transition is not None:
             self.set("transition", transition)
-        if min is not None:
-            self.set("min", min)
-        if max is not None:
-            self.set("max", max)
-        if qualifier is not None:
-            self.set("qualifier", qualifier)
 
     pass
